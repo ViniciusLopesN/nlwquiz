@@ -108,7 +108,7 @@ const template = document.querySelector('template');
 const corrects = new Set();
 const totalDequestions = questions.length;
 const mostrarTotal = document.querySelector('#acertos span');
-mostrarTotal.textContent = `${corrects.size} de ${totalDequestions}`;
+
 
 for(const item of questions) {
   const quizItem = template.content.cloneNode(true);
@@ -127,7 +127,7 @@ for(const item of questions) {
       if(estacorrect) {
         corrects.add(item);
       }
-      mostrarTotal.textContent = `${corrects.size} de ${totalDequestions}`;
+      mostrarTotal.textContent = `${corrects.size} out of ${totalDequestions}`;
     }
 
     quizItem.querySelector('dl').appendChild(dt);
