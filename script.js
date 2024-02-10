@@ -1,122 +1,133 @@
-const perguntas = [
+const questions = [
   {
-    pergunta: 'O que significa o acrônimo "DOM" em JavaScript?',
-    respostas: [
-      'Documento de Objetos Móveis',
-      'Modelo de Objetos do Documento',
-      'Domínio de Operações Móveis',
+    question: 'Which team won Super Bowl LI in 2017, staging the biggest comeback in the competition\'s history?',
+    answers: [
+      'New England Patriots',
+      'Atlanta Falcons',
+      'Philadelphia Eagles',
+      'Pittsburgh Steelers',
     ],
-    correta: 1
+    correct: 0
   },
   {
-    pergunta: 'Qual é a função do operador "===" em comparações em JavaScript?',
-    respostas: [
-      'Compara valores e tipos sem coerção',
-      'Realiza uma comparação ampla com coerção',
-      'Compara apenas os valores, ignorando os tipos',
+    question: 'Who holds the record for the most touchdowns scored in a single NFL season?',
+    answers: [
+      'Tom Brady',
+      'Peyton Manning',
+      'LaDainian Tomlinson',
+      'Jerry Rice',
     ],
-    correta: 0
+    correct: 2
   },
   {
-    pergunta: 'Como se declara uma variável em JavaScript?',
-    respostas: [
-      'let myVar = 10;',
-      'const = myVar 10;',
-      'var myVar = 10;',
+    question: 'Which player is known as "The Beast Mode"?',
+    answers: [
+      'Adrian Peterson',
+      'Marshawn Lynch',
+      'DeMarco Murray',
+      'Derrick Henry',
     ],
-    correta: 2
+    correct: 1
   },
   {
-    pergunta: 'Qual é a finalidade do método "addEventListener" em JavaScript?',
-    respostas: [
-      'Adicionar estilos ao elemento',
-      'Adicionar um ouvinte de eventos ao elemento',
-      'Remover um elemento do DOM',
+    question: 'How many teams make the playoffs in each NFL conference?',
+    answers: [
+      '6',
+      '8',
+      '10',
+      '12',
     ],
-    correta: 1
+    correct: 0
   },
   {
-    pergunta: 'O que é o JSON em JavaScript?',
-    respostas: [
-      'Uma linguagem de programação',
-      'Um formato de dados para intercâmbio de dados',
-      'Um método de ordenação de arrays',
+    question: 'In what year was the NFL founded?',
+    answers: [
+      '1920',
+      '1932',
+      '1945',
+      '1958',
     ],
-    correta: 1
+    correct: 0
   },
   {
-    pergunta: 'Como se chama a função que é executada quando ocorre um erro em JavaScript?',
-    respostas: [
-      'handleError()',
-      'catchError()',
-      'onError()',
+    question: 'Which franchise has won the most Super Bowls in NFL history?',
+    answers: [
+      'San Francisco 49ers',
+      'New England Patriots',
+      'Dallas Cowboys',
+      'Pittsburgh Steelers',
     ],
-    correta: 2
+    correct: 1
   },
   {
-    pergunta: 'Qual é a diferença entre "let" e "const" na declaração de variáveis?',
-    respostas: [
-      'let é usado para valores constantes, const para valores mutáveis',
-      'let é usado para variáveis globais, const para variáveis locais',
-      'let permite reatribuição, const não permite reatribuição',
+    question: 'Who holds the record for the most rushing yards in a single NFL season?',
+    answers: [
+      'Barry Sanders',
+      'Eric Dickerson',
+      'Adrian Peterson',
+      'Jim Brown',
     ],
-    correta: 2
+    correct: 1
   },
   {
-    pergunta: 'O que é o método "forEach" em JavaScript?',
-    respostas: [
-      'Um método para criar loops',
-      'Um método para iterar sobre elementos de um array',
-      'Um método para transformar strings em arrays',
+    question: 'Which is the only team that has never reached the Super Bowl in NFL history?',
+    answers: [
+      'Detroit Lions',
+      'Cleveland Browns',
+      'Houston Texans',
+      'Jacksonville Jaguars',
     ],
-    correta: 1
+    correct: 0
   },
   {
-    pergunta: 'Como se realiza uma requisição assíncrona em JavaScript?',
-    respostas: [
-      'Usando a palavra-chave "sync"',
-      'Utilizando o método "async"',
-      'Usando Promises ou async/await',
+    question: 'What is the oldest operating stadium in the NFL?',
+    answers: [
+      'Lambeau Field',
+      'Soldier Field',
+      'Arrowhead Stadium',
+      'MetLife Stadium',
     ],
-    correta: 2
+    correct: 0
   },
   {
-    pergunta: 'Qual é a finalidade do método "querySelector"?',
-    respostas: [
-      'Selecionar elementos por classe',
-      'Selecionar elementos por id',
-      'Selecionar elementos por um seletor CSS',
+    question: 'Who is the coach with the most victories in the history of the NFL?',
+    answers: [
+      'Bill Belichick',
+      'Tom Landry',
+      'Don Shula',
+      'Chuck Noll',
     ],
-    correta: 2
-  }
+    correct: 2
+  },
 ];
+
 
 const quiz = document.querySelector('#quiz');
 const template = document.querySelector('template');
 
-const corretas = new Set();
-const totalDePerguntas = perguntas.length;
+const corrects = new Set();
+const totalDequestions = questions.length;
 const mostrarTotal = document.querySelector('#acertos span');
-mostrarTotal.textContent = `${corretas.size} de ${totalDePerguntas}`;
+mostrarTotal.textContent = `${corrects.size} de ${totalDequestions}`;
 
-for(const item of perguntas) {
+for(const item of questions) {
   const quizItem = template.content.cloneNode(true);
-  quizItem.querySelector('h3').textContent = item.pergunta;
+  quizItem.querySelector('h3').textContent = item.question;
  
 
-  for(const resposta of item.respostas) {
+  for(const answer of item.answers) {
     const dt = quizItem.querySelector('dl dt').cloneNode(true);
-    dt.querySelector('span').textContent = resposta;
-    dt.querySelector('input').setAttribute('name', 'pergunta-' + perguntas.indexOf(item));
-    dt.querySelector('input').value = item.respostas.indexOf(resposta);
+    dt.querySelector('span').textContent = answer;
+    dt.querySelector('input').setAttribute('name', 'question-' + questions.indexOf(item));
+    dt.querySelector('input').value = item.answers.indexOf(answer);
 
     dt.querySelector('input').onchange = (event) => {
-      const estaCorreta = event.currentTarget.value == item.correta;
-      corretas.delete(item);
-      if(estaCorreta) {
-        corretas.add(item);
+      const estacorrect = event.currentTarget.value == item.correct;
+      corrects.delete(item);
+      if(estacorrect) {
+        corrects.add(item);
       }
-      mostrarTotal.textContent = `${corretas.size} de ${totalDePerguntas}`;
+      mostrarTotal.textContent = `${corrects.size} de ${totalDequestions}`;
     }
 
     quizItem.querySelector('dl').appendChild(dt);
