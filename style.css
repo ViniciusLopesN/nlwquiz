@@ -4,7 +4,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+
+  font-family: 'Inter', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,7 +22,11 @@ main {
   padding: 20px;
   max-width: 648px;
   margin: 0 auto 64px;
+}
 
+#quiz {
+  counter-reset: quiz-item;
+  
 }
 
 #acertos {
@@ -41,38 +46,64 @@ header {
   border-bottom: 1px solid #1e283c;
 }
 
-.quizz-item h3 {
-  padding: 20px;
-  background-color: #1e283c;
-  margin-top: 0px;
-  border-radius: 5px;
-}
-
-
-
-.quizz-item {
+.quiz-item {
   border: 2px solid #1e283c;
   border-radius: 6px;
   margin: 20px 0;
+
+  overflow: hidden;
 }
 
-input[type='radio']{
-  all: unset;
-  border: 1px solid #94a3b8;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
+
+.quiz-item h3 {
+  padding: 16px 20px;
+
+
   display: flex;
-  accent-color: #A3E635;
+  align-items: center;
+  gap: 12px;
+
+  background-color: #1e283c;
+}
+
+.quiz-item h3:before {
+  counter-increment: quiz-item;
+  content: counter(quiz-item);
+
+  background-color: #475569;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+  border-radius: 50%;
+
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+
+
+
+input[type='radio'] {
+  all: unset;
+  border: 1px solid hsl(215, 20%, 65%);
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 input:checked {
   border: 1px solid #A3E635;
 }
 
-input:checked::before{
+input:checked::before {
   content:"";
   width: 10px;
   height: 10px;
@@ -80,14 +111,14 @@ input:checked::before{
   border-radius: 50%;
 }
 
-.quizz-item dl {
+.quiz-item dl {
   padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.quizz-item dl dt {
+.quiz-item dl dt {
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0;
@@ -96,3 +127,19 @@ input:checked::before{
   gap: 8px;
 }
 
+#github {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  margin-bottom: 25px;
+  filter: opacity(0.13);
+}
+
+#githubLogo {
+  transition: all .2s ease-in-out; 
+}
+
+#githubLogo:hover {
+  transform: scale(1.3);
+}
